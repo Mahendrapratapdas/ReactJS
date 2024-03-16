@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array And Objects in JSX</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const App = () => {
+            const students = [
+                {
+                    name: "Mahendra",
+                    age: 24,
+                    subject: "Computer Science"
+                },
+                {
+                    name: "Pratap",
+                    age: 25,
+                    subject: "MCA"
+                },
+                {
+                    name: "Das",
+                    age: 26,
+                    subject: "B.TEch"
+                }
+            ];
+            return (
+                <>
+                    <h1>Let's Play with Array and Object of JavaScript</h1>
+                    <table>
+                        <thead>
+                            <th>Name</th>
+                            <th>age</th>
+                            <th>subject</th>
+                        </thead>
+                        <tbody>
+                            {students.map((student,index)=>(
+                                <tr key={index}>
+                                    <td>{student.name}</td>
+                                    <td>{student.age}</td>
+                                    <td>{student.subject}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </>
+            )
+        }
+        ReactDOM.createRoot(document.getElementById("root")).render(<App />)
+    </script>
+</body>
+
+</html>
