@@ -15,25 +15,34 @@
         let run = 0;
         let wicket = 0;
         function clickOne(){
-            alert("One is clicked")
+            run+=1;
+            rootElement.render(<App/>)
+        }
+        function clickTwo(){
+            run+=2;
+            rootElement.render(<App/>)
+        }
+        function updateScore(score){
+            run+=score;
+            rootElement.render(<App/>)
         }
         const App=()=>(
             <>
             <h1>Welcome to Score Keeper APP</h1>
             <h2>Score: {run}/{wicket}</h2>
-            <div>
+            <div> 
                 <button onClick={clickOne}>1</button>
-                <button>2</button> 
-                <button>3</button> 
-                <button>4</button> 
-                <button>5</button> 
-                <button>6</button> 
+                <button onClick={clickTwo}>2</button> 
+                <button onClick={()=>updateScore(3)}>3</button> 
+                <button onClick={()=>updateScore(4)}>4</button> 
+                <button onClick={()=>updateScore(5)}>5</button> 
+                <button onClick={()=>updateScore(6)}>6</button> 
                 <button>wicket</button>     
             </div>
             </>
         )
-
-        ReactDOM.createRoot(document.getElementById("root")).render(<App/>)
+        const rootElement = ReactDOM.createRoot(document.getElementById("root"))
+        rootElement.render(<App/>)
     </script>
 </body>
 </html>
