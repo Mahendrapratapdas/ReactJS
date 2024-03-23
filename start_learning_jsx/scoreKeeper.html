@@ -23,8 +23,16 @@
             rootElement.render(<App/>)
         }
         function updateScore(score){
-            run+=score;
-            rootElement.render(<App/>)
+            if (wicket<10){
+                run+=score;
+                rootElement.render(<App/>)
+            }
+        }
+        function updateWicket(){
+            if (wicket<10){
+                wicket+=1;
+                rootElement.render(<App/>)
+            }
         }
         const App=()=>(
             <>
@@ -37,7 +45,7 @@
                 <button onClick={()=>updateScore(4)}>4</button> 
                 <button onClick={()=>updateScore(5)}>5</button> 
                 <button onClick={()=>updateScore(6)}>6</button> 
-                <button>wicket</button>     
+                <button onClick={updateWicket}>wicket</button>     
             </div>
             </>
         )
