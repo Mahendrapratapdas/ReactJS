@@ -16,7 +16,7 @@
         let wicket = 0;
         let ballWiseScore = [];
         let hit = 0; 
-
+        let inputRef = React.createRef();
         function updateScore(score){
             // if (wicket<10){
             //     ballWiseScore.push(score);
@@ -35,8 +35,12 @@
             hit = "W";
             rootElement.render(<App/>)
         }
-        function handelEvent(event){
+        function handelSubmit(event){
           event.preventDefault();
+          ballWiseScore.unshift(`${hit}, ${inputRef.current.value}`);
+          hit=0;
+          inputRef.current.value="";
+          rootElement.render(<App/>)
         }
         const Result=()=>(
             <div>
@@ -66,10 +70,10 @@
             </div>
         )
         const Comment=()=>(
-          <form onSubmit={handelEvent}>
+          <form onSubmit={handelSubmit}>
           <input value={hit}/>
-          <input />
-          <button type="submit">Submit</button>
+          <input ref={inputRef}/>
+          <button>Submit</button>
           </form>
         )
         const App=()=>(
@@ -78,6 +82,12 @@
             <h2>Score: {run}/{wicket}</h2>
             <ScoreButton/>
             <Comment/>
+            <hr/>
+            <div>
+              {ballWiseScore.map((res, index)=>(
+                <p key={index}>{res}</p>
+              ))}  
+            </div>
             </>
         )
         const rootElement = ReactDOM.createRoot(document.getElementById("root"))
