@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <title>React App</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+    let name;
+    let mark;
+    let nameRef = React.createRef();
+    let markRef = React.createRef();
+    let studentArray = [];
+    const handelSubmit=(event)=>{
+    	event.preventDefault();
+        name = nameRef.current.value;
+        mark = markRef.current.value;
+        nameRef.current.value = '';
+        markRef.current.value = '';
+        const studentObj = {
+            name: name,
+            marks: mark
+        };
+        studentArray.push(studentObj);
+        rootElement.render(<App />);
+    }
+      const Form = () => (
+      <>
+      <h1>Students' form</h1>
+      <form onSubmit={handelSubmit}>
+      <input placeholder="Name" ref={nameRef}/>
+      <input placeholder="Marks" ref={markRef}/>
+      <button>Submit</button>
+      </form>
+      </>);
+
+      const Result = () =>(
+        <> 
+        <table border='1'>
+            <thead>
+                <tr>
+                    <th>Student's name</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                {studentArray.map((res,index)=>(
+                    <tr key={index}>
+                        <td>{res.name}</td>
+                        <td>{res.marks}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+        </>
+        );
+
+      const App = () => (
+        <>
+          <Form />
+          <Result />
+        </>
+      );
+
+      const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+      rootElement.render(<App />);
+    </script>
+  </body>
+</html>
